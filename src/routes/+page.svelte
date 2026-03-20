@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { facilityStore } from '$lib/data/store.svelte';
-	import type { Facility } from '$lib/data/facilityStore.list';
+	import type { Facility } from '$lib/data/facilities';
 	import SearchFilters from '$lib/components/SearchFilters.svelte';
 	import FacilityCard from '$lib/components/FacilityCard.svelte';
 	import CompareBar from '$lib/components/CompareBar.svelte';
@@ -58,14 +58,21 @@
 	<title>Aged Care Finder | Search & Compare Facilities</title>
 </svelte:head>
 
-<div class="min-h-screen bg-gray-950 text-gray-100">
+<div class="min-h-screen bg-warm-50 text-warm-900">
 	<!-- Header -->
-	<header class="border-b border-gray-800 bg-gray-950/80 px-6 py-5 backdrop-blur">
+	<header class="border-b border-warm-200 bg-white/80 px-6 py-5 backdrop-blur">
 		<div class="mx-auto max-w-7xl">
-			<h1 class="text-2xl font-bold text-white">Aged Care Finder by Yui</h1>
-			<p class="mt-1 text-sm text-gray-400">
-				Search and compare {facilityStore.list.length} aged care facilityStore.list across Australia
-			</p>
+			<div class="flex items-center justify-between">
+				<div>
+					<h1 class="text-2xl font-bold text-warm-800">Aged Care Finder by Yui</h1>
+					<p class="mt-1 text-sm text-warm-500">
+						Search and compare {facilityStore.list.length} aged care facilities across Australia
+					</p>
+				</div>
+				<a href="/admin" class="rounded-lg border border-warm-300 px-4 py-2 text-sm text-warm-500 hover:text-warm-800 hover:border-warm-400 transition">
+					Admin
+				</a>
+			</div>
 		</div>
 	</header>
 
@@ -76,8 +83,8 @@
 		/>
 
 		<div class="mt-4 flex items-center justify-between">
-			<p class="text-sm text-gray-400">
-				{filtered.length} {filtered.length === 1 ? 'facility' : 'facilityStore.list'} found
+			<p class="text-sm text-warm-500">
+				{filtered.length} {filtered.length === 1 ? 'facility' : 'facilities'} found
 			</p>
 		</div>
 
@@ -93,10 +100,10 @@
 
 		{#if filtered.length === 0}
 			<div class="mt-12 text-center">
-				<p class="text-lg text-gray-500">No facilityStore.list match your filters.</p>
+				<p class="text-lg text-warm-400">No facilities match your filters.</p>
 				<button
 					onclick={() => (filters = { search: '', selectedState: '', type: '', minRating: 0, services: [], sortBy: 'rating' })}
-					class="mt-3 text-blue-400 hover:text-blue-300"
+					class="mt-3 text-accent-600 hover:text-accent-700"
 				>
 					Clear all filters
 				</button>

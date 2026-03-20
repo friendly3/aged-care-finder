@@ -46,21 +46,21 @@
 	<title>Admin | Aged Care Finder</title>
 </svelte:head>
 
-<div class="min-h-screen bg-gray-950 text-gray-100">
-	<header class="border-b border-gray-800 px-6 py-4">
+<div class="min-h-screen bg-warm-50 text-warm-900">
+	<header class="border-b border-warm-200 bg-white/80 px-6 py-4 backdrop-blur">
 		<div class="mx-auto flex max-w-6xl items-center justify-between">
 			<div>
-				<a href="/" class="text-sm text-blue-400 hover:text-blue-300">&larr; Back to site</a>
-				<h1 class="mt-1 text-2xl font-bold text-white">Manage Facilities</h1>
+				<a href="/" class="text-sm text-accent-600 hover:text-accent-700">&larr; Back to site</a>
+				<h1 class="mt-1 text-2xl font-bold text-warm-800">Manage Facilities</h1>
 			</div>
 			{#if mode === 'list'}
 				<div class="flex gap-2">
 					<button onclick={() => facilityStore.reset()}
-						class="rounded-lg border border-gray-700 px-4 py-2 text-sm text-gray-400 hover:text-white">
+						class="rounded-lg border border-warm-300 px-4 py-2 text-sm text-warm-500 hover:text-warm-800">
 						Reset to Defaults
 					</button>
 					<button onclick={() => { mode = 'add'; editingFacility = undefined; }}
-						class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-500">
+						class="rounded-lg bg-accent-600 px-4 py-2 text-sm font-medium text-white hover:bg-accent-500">
 						+ Add Facility
 					</button>
 				</div>
@@ -70,66 +70,63 @@
 
 	<main class="mx-auto max-w-6xl px-6 py-6">
 		{#if mode === 'list'}
-			<!-- Search -->
 			<input
 				type="text"
 				placeholder="Search facilities..."
 				bind:value={searchQuery}
-				class="mb-4 w-full max-w-md rounded-lg border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+				class="mb-4 w-full max-w-md rounded-lg border border-warm-200 bg-white px-4 py-2.5 text-sm text-warm-800 placeholder-warm-400 focus:border-accent-500 focus:outline-none"
 			/>
 
-			<p class="mb-4 text-sm text-gray-400">{filtered.length} facilities</p>
+			<p class="mb-4 text-sm text-warm-500">{filtered.length} facilities</p>
 
-			<!-- Table -->
-			<div class="overflow-x-auto rounded-lg border border-gray-800">
+			<div class="overflow-x-auto rounded-lg border border-warm-200 bg-white shadow-sm">
 				<table class="w-full text-left text-sm">
-					<thead class="border-b border-gray-800 bg-gray-900">
+					<thead class="border-b border-warm-200 bg-warm-50">
 						<tr>
-							<th class="px-4 py-3 font-medium text-gray-400">Name</th>
-							<th class="px-4 py-3 font-medium text-gray-400">Location</th>
-							<th class="px-4 py-3 font-medium text-gray-400">Rating</th>
-							<th class="px-4 py-3 font-medium text-gray-400">Beds</th>
-							<th class="px-4 py-3 font-medium text-gray-400">Status</th>
-							<th class="px-4 py-3 font-medium text-gray-400 text-right">Actions</th>
+							<th class="px-4 py-3 font-medium text-warm-500">Name</th>
+							<th class="px-4 py-3 font-medium text-warm-500">Location</th>
+							<th class="px-4 py-3 font-medium text-warm-500">Rating</th>
+							<th class="px-4 py-3 font-medium text-warm-500">Beds</th>
+							<th class="px-4 py-3 font-medium text-warm-500">Status</th>
+							<th class="px-4 py-3 font-medium text-warm-500 text-right">Actions</th>
 						</tr>
 					</thead>
 					<tbody>
 						{#each filtered as facility (facility.id)}
-							<tr class="border-b border-gray-800/50 last:border-0">
+							<tr class="border-b border-warm-100 last:border-0">
 								<td class="px-4 py-3">
-									<span class="text-white">{facility.name}</span>
-									<span class="block text-xs text-gray-500">{facility.provider}</span>
+									<span class="text-warm-800">{facility.name}</span>
+									<span class="block text-xs text-warm-400">{facility.provider}</span>
 								</td>
-								<td class="px-4 py-3 text-gray-300">{facility.suburb}, {facility.state}</td>
-								<td class="px-4 py-3 text-yellow-400">
-									{'&#9733;'.repeat(facility.starRating)}{'&#9733;'.repeat(5 - facility.starRating).replace(/&#9733;/g, '')}
-									<span class="text-gray-500">{facility.starRating}/5</span>
+								<td class="px-4 py-3 text-warm-600">{facility.suburb}, {facility.state}</td>
+								<td class="px-4 py-3 text-amber-500">
+									{facility.starRating}/5
 								</td>
-								<td class="px-4 py-3 text-gray-300">
+								<td class="px-4 py-3 text-warm-600">
 									{facility.availableBeds}/{facility.totalBeds}
 								</td>
 								<td class="px-4 py-3">
 									<span class="rounded-full px-2 py-0.5 text-xs font-medium
 										{facility.complianceStatus === 'Met'
-											? 'bg-green-900/50 text-green-400'
+											? 'bg-green-100 text-green-700'
 											: facility.complianceStatus === 'Not Met'
-												? 'bg-red-900/50 text-red-400'
-												: 'bg-yellow-900/50 text-yellow-400'}">
+												? 'bg-red-100 text-red-700'
+												: 'bg-yellow-100 text-yellow-700'}">
 										{facility.complianceStatus}
 									</span>
 								</td>
 								<td class="px-4 py-3 text-right">
 									{#if deleteConfirmId === facility.id}
-										<span class="mr-2 text-xs text-red-400">Delete?</span>
+										<span class="mr-2 text-xs text-red-600">Delete?</span>
 										<button onclick={() => handleDelete(facility.id)}
-											class="mr-1 text-xs text-red-400 hover:text-red-300">Yes</button>
+											class="mr-1 text-xs text-red-600 hover:text-red-800">Yes</button>
 										<button onclick={() => (deleteConfirmId = null)}
-											class="text-xs text-gray-500 hover:text-white">No</button>
+											class="text-xs text-warm-400 hover:text-warm-800">No</button>
 									{:else}
 										<button onclick={() => startEdit(facility)}
-											class="mr-3 text-sm text-blue-400 hover:text-blue-300">Edit</button>
+											class="mr-3 text-sm text-accent-600 hover:text-accent-700">Edit</button>
 										<button onclick={() => (deleteConfirmId = facility.id)}
-											class="text-sm text-red-400 hover:text-red-300">Delete</button>
+											class="text-sm text-red-500 hover:text-red-700">Delete</button>
 									{/if}
 								</td>
 							</tr>
@@ -139,10 +136,10 @@
 			</div>
 
 			{#if filtered.length === 0}
-				<p class="mt-8 text-center text-gray-500">No facilities found.</p>
+				<p class="mt-8 text-center text-warm-400">No facilities found.</p>
 			{/if}
 		{:else}
-			<div class="rounded-lg border border-gray-800 bg-gray-900 p-6">
+			<div class="rounded-lg border border-warm-200 bg-white p-6 shadow-sm">
 				<FacilityForm
 					facility={editingFacility}
 					onSubmit={handleSubmit}

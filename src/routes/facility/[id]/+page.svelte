@@ -10,110 +10,103 @@
 	<title>{facility ? facility.name : 'Not Found'} | Aged Care Finder</title>
 </svelte:head>
 
-<div class="min-h-screen bg-gray-950 text-gray-100">
+<div class="min-h-screen bg-warm-50 text-warm-900">
 	{#if facility}
-		<!-- Back nav -->
-		<header class="border-b border-gray-800 px-6 py-4">
+		<header class="border-b border-warm-200 bg-white/80 px-6 py-4 backdrop-blur">
 			<div class="mx-auto max-w-5xl">
-				<a href="/" class="text-sm text-blue-400 hover:text-blue-300">&larr; Back to search</a>
+				<a href="/" class="text-sm text-accent-600 hover:text-accent-700">&larr; Back to search</a>
 			</div>
 		</header>
 
 		<main class="mx-auto max-w-5xl px-6 py-8">
-			<!-- Title section -->
 			<div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
 				<div>
-					<h1 class="text-3xl font-bold text-white">{facility.name}</h1>
-					<p class="mt-1 text-gray-400">{facility.provider}</p>
-					<p class="mt-1 text-sm text-gray-500">
+					<h1 class="text-3xl font-bold text-warm-800">{facility.name}</h1>
+					<p class="mt-1 text-warm-500">{facility.provider}</p>
+					<p class="mt-1 text-sm text-warm-400">
 						{facility.address}, {facility.suburb}, {facility.state} {facility.postcode}
 					</p>
-					<p class="mt-1 text-sm text-gray-500">{facility.phone}</p>
+					<p class="mt-1 text-sm text-warm-400">{facility.phone}</p>
 				</div>
 				<div class="flex flex-col items-end gap-2">
 					<StarRating rating={facility.starRating} size="lg" />
 					<span
 						class="rounded-full px-3 py-1 text-sm font-medium {facility.complianceStatus === 'Met'
-							? 'bg-green-900/50 text-green-400'
+							? 'bg-green-100 text-green-700'
 							: facility.complianceStatus === 'Not Met'
-								? 'bg-red-900/50 text-red-400'
-								: 'bg-yellow-900/50 text-yellow-400'}"
+								? 'bg-red-100 text-red-700'
+								: 'bg-yellow-100 text-yellow-700'}"
 					>
 						Compliance: {facility.complianceStatus}
 					</span>
 				</div>
 			</div>
 
-			<p class="mt-6 text-gray-300">{facility.description}</p>
+			<p class="mt-6 text-warm-600">{facility.description}</p>
 
-			<!-- Info grid -->
 			<div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-				<!-- Pricing -->
-				<div class="rounded-lg border border-gray-800 bg-gray-900 p-5">
-					<h2 class="text-lg font-semibold text-white">Pricing</h2>
+				<div class="rounded-lg border border-warm-200 bg-white p-5 shadow-sm">
+					<h2 class="text-lg font-semibold text-warm-800">Pricing</h2>
 					<div class="mt-4 space-y-3">
 						<div class="flex justify-between">
-							<span class="text-gray-400">Daily accommodation</span>
-							<span class="text-white">${facility.dailyPrice.from} – ${facility.dailyPrice.to}</span>
+							<span class="text-warm-500">Daily accommodation</span>
+							<span class="text-warm-800">${facility.dailyPrice.from} – ${facility.dailyPrice.to}</span>
 						</div>
 						<div class="flex justify-between">
-							<span class="text-gray-400">Refundable deposit</span>
-							<span class="text-white">
+							<span class="text-warm-500">Refundable deposit</span>
+							<span class="text-warm-800">
 								${facility.refundableDeposit.from.toLocaleString()} – ${facility.refundableDeposit.to.toLocaleString()}
 							</span>
 						</div>
 					</div>
 				</div>
 
-				<!-- Capacity -->
-				<div class="rounded-lg border border-gray-800 bg-gray-900 p-5">
-					<h2 class="text-lg font-semibold text-white">Capacity</h2>
+				<div class="rounded-lg border border-warm-200 bg-white p-5 shadow-sm">
+					<h2 class="text-lg font-semibold text-warm-800">Capacity</h2>
 					<div class="mt-4 space-y-3">
 						<div class="flex justify-between">
-							<span class="text-gray-400">Total beds</span>
-							<span class="text-white">{facility.totalBeds}</span>
+							<span class="text-warm-500">Total beds</span>
+							<span class="text-warm-800">{facility.totalBeds}</span>
 						</div>
 						<div class="flex justify-between">
-							<span class="text-gray-400">Available beds</span>
-							<span class={facility.availableBeds > 0 ? 'text-green-400' : 'text-red-400'}>
+							<span class="text-warm-500">Available beds</span>
+							<span class={facility.availableBeds > 0 ? 'text-green-600' : 'text-red-600'}>
 								{facility.availableBeds > 0 ? facility.availableBeds : 'No vacancies'}
 							</span>
 						</div>
 						<div class="flex justify-between">
-							<span class="text-gray-400">Type</span>
-							<span class="text-white">{facility.type}</span>
+							<span class="text-warm-500">Type</span>
+							<span class="text-warm-800">{facility.type}</span>
 						</div>
 					</div>
 				</div>
 
-				<!-- Quality measures -->
-				<div class="rounded-lg border border-gray-800 bg-gray-900 p-5">
-					<h2 class="text-lg font-semibold text-white">Quality Measures</h2>
+				<div class="rounded-lg border border-warm-200 bg-white p-5 shadow-sm">
+					<h2 class="text-lg font-semibold text-warm-800">Quality Measures</h2>
 					<div class="mt-4 space-y-3">
 						{#each Object.entries(facility.qualityMeasures) as [key, value]}
 							<div class="flex items-center justify-between">
-								<span class="text-gray-400 capitalize">{key}</span>
+								<span class="text-warm-500 capitalize">{key}</span>
 								<div class="flex items-center gap-2">
-									<div class="h-2 w-24 overflow-hidden rounded-full bg-gray-700">
+									<div class="h-2 w-24 overflow-hidden rounded-full bg-warm-200">
 										<div
 											class="h-full rounded-full {value >= 4 ? 'bg-green-500' : value >= 3 ? 'bg-yellow-500' : 'bg-red-500'}"
 											style="width: {(value / 5) * 100}%"
 										></div>
 									</div>
-									<span class="w-6 text-right text-sm text-gray-300">{value}/5</span>
+									<span class="w-6 text-right text-sm text-warm-600">{value}/5</span>
 								</div>
 							</div>
 						{/each}
 					</div>
 				</div>
 
-				<!-- Audit -->
-				<div class="rounded-lg border border-gray-800 bg-gray-900 p-5">
-					<h2 class="text-lg font-semibold text-white">Audit Information</h2>
+				<div class="rounded-lg border border-warm-200 bg-white p-5 shadow-sm">
+					<h2 class="text-lg font-semibold text-warm-800">Audit Information</h2>
 					<div class="mt-4 space-y-3">
 						<div class="flex justify-between">
-							<span class="text-gray-400">Last audit date</span>
-							<span class="text-white">
+							<span class="text-warm-500">Last audit date</span>
+							<span class="text-warm-800">
 								{new Date(facility.lastAuditDate).toLocaleDateString('en-AU', {
 									day: 'numeric',
 									month: 'long',
@@ -122,13 +115,13 @@
 							</span>
 						</div>
 						<div class="flex justify-between">
-							<span class="text-gray-400">Compliance status</span>
+							<span class="text-warm-500">Compliance status</span>
 							<span
 								class={facility.complianceStatus === 'Met'
-									? 'text-green-400'
+									? 'text-green-600'
 									: facility.complianceStatus === 'Not Met'
-										? 'text-red-400'
-										: 'text-yellow-400'}
+										? 'text-red-600'
+										: 'text-yellow-600'}
 							>
 								{facility.complianceStatus}
 							</span>
@@ -137,20 +130,19 @@
 				</div>
 			</div>
 
-			<!-- Services -->
-			<div class="mt-6 rounded-lg border border-gray-800 bg-gray-900 p-5">
-				<h2 class="text-lg font-semibold text-white">Services</h2>
+			<div class="mt-6 rounded-lg border border-warm-200 bg-white p-5 shadow-sm">
+				<h2 class="text-lg font-semibold text-warm-800">Services</h2>
 				<div class="mt-4 flex flex-wrap gap-2">
 					{#each facility.services as service}
-						<span class="rounded-full bg-gray-800 px-3 py-1 text-sm text-gray-300">{service}</span>
+						<span class="rounded-full bg-warm-100 px-3 py-1 text-sm text-warm-600">{service}</span>
 					{/each}
 				</div>
 			</div>
 		</main>
 	{:else}
 		<main class="mx-auto max-w-5xl px-6 py-12 text-center">
-			<h1 class="text-2xl font-bold text-white">Facility not found</h1>
-			<a href="/" class="mt-4 inline-block text-blue-400 hover:text-blue-300">Back to search</a>
+			<h1 class="text-2xl font-bold text-warm-800">Facility not found</h1>
+			<a href="/" class="mt-4 inline-block text-accent-600 hover:text-accent-700">Back to search</a>
 		</main>
 	{/if}
 </div>

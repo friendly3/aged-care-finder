@@ -42,7 +42,7 @@
 	}
 </script>
 
-<div class="space-y-4 rounded-lg border border-gray-800 bg-gray-900 p-5">
+<div class="space-y-4 rounded-lg border border-warm-200 bg-white p-5 shadow-sm">
 	<!-- Search -->
 	<div>
 		<input
@@ -50,7 +50,7 @@
 			placeholder="Search by name, suburb, or provider..."
 			value={search}
 			oninput={(e) => update({ search: e.currentTarget.value })}
-			class="w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+			class="w-full rounded-lg border border-warm-200 bg-warm-50 px-4 py-2.5 text-sm text-warm-800 placeholder-warm-400 focus:border-accent-500 focus:outline-none"
 		/>
 	</div>
 
@@ -59,7 +59,7 @@
 		<select
 			value={selectedState}
 			onchange={(e) => update({ selectedState: e.currentTarget.value })}
-			class="rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-white focus:border-blue-500 focus:outline-none"
+			class="rounded-lg border border-warm-200 bg-warm-50 px-3 py-2 text-sm text-warm-700 focus:border-accent-500 focus:outline-none"
 		>
 			<option value="">All States</option>
 			{#each allStates as s}
@@ -70,7 +70,7 @@
 		<select
 			value={type}
 			onchange={(e) => update({ type: e.currentTarget.value })}
-			class="rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-white focus:border-blue-500 focus:outline-none"
+			class="rounded-lg border border-warm-200 bg-warm-50 px-3 py-2 text-sm text-warm-700 focus:border-accent-500 focus:outline-none"
 		>
 			<option value="">All Types</option>
 			{#each allTypes as t}
@@ -81,7 +81,7 @@
 		<select
 			value={minRating}
 			onchange={(e) => update({ minRating: Number(e.currentTarget.value) })}
-			class="rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-white focus:border-blue-500 focus:outline-none"
+			class="rounded-lg border border-warm-200 bg-warm-50 px-3 py-2 text-sm text-warm-700 focus:border-accent-500 focus:outline-none"
 		>
 			<option value={0}>Any Rating</option>
 			<option value={2}>2+ Stars</option>
@@ -93,13 +93,13 @@
 		<select
 			value={sortBy}
 			onchange={(e) => update({ sortBy: e.currentTarget.value })}
-			class="rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-white focus:border-blue-500 focus:outline-none"
+			class="rounded-lg border border-warm-200 bg-warm-50 px-3 py-2 text-sm text-warm-700 focus:border-accent-500 focus:outline-none"
 		>
 			<option value="rating">Highest Rated</option>
 			<option value="price-low">Price: Low to High</option>
 			<option value="price-high">Price: High to Low</option>
 			<option value="beds">Most Beds Available</option>
-			<option value="name">Name A–Z</option>
+			<option value="name">Name A-Z</option>
 		</select>
 	</div>
 
@@ -107,7 +107,7 @@
 	<div>
 		<button
 			onclick={() => (showServices = !showServices)}
-			class="text-sm text-blue-400 hover:text-blue-300"
+			class="text-sm text-accent-600 hover:text-accent-700"
 		>
 			{showServices ? 'Hide' : 'Filter by'} services ({services.length} selected)
 		</button>
@@ -118,8 +118,8 @@
 					<button
 						onclick={() => toggleService(service)}
 						class="rounded-full px-3 py-1 text-xs transition {services.includes(service)
-							? 'bg-blue-600 text-white'
-							: 'bg-gray-800 text-gray-400 hover:text-gray-200'}"
+							? 'bg-accent-600 text-white'
+							: 'bg-warm-100 text-warm-500 hover:text-warm-700'}"
 					>
 						{service}
 					</button>
