@@ -22,3 +22,8 @@ body {
 	background-color: var(--color-warm-50);
 	color: var(--color-warm-900);
 }
+
+/* Sidebar enhancements */
+.sidebar-nav {
+	transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
