@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { ActionData } from './$types'
+	import type { SubmitFunction } from '@sveltejs/kit'
 	import { enhance } from '$app/forms'
 
 	let { data, form } = $props()
@@ -15,7 +16,7 @@
 		}
 	})
 
-	function handleSubmit() {
+	const handleSubmit: SubmitFunction = () => {
 		loading = true
 		return async ({ result, update }) => {
 			if (result.type === 'success' || result.type === 'failure') {
