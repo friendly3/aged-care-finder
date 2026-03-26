@@ -1,22 +1,80 @@
-# sv
+# JCH Pham AusPost Incident Tracker
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A secure incident tracking application for courier operations, built with SvelteKit and Supabase.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **User Authentication** - Secure login/signup with Supabase Auth
+- **Incident Management** - Create, update, and track incidents
+- **Team Management** - Manage team leaders and drivers
+- **Secure Data Isolation** - Row-Level Security (RLS) ensures users only see their own data
+- **Real-time Dashboard** - Analytics and incident overview
+- **Facility Management** - Track facility information and compliance
 
-```sh
-# create a new project
-npx sv create my-app
+## Tech Stack
+
+- **SvelteKit 2.50.2** - Full-stack framework with SSR
+- **Svelte 5** - Reactive components with latest runes
+- **Supabase** - Backend, authentication, and database
+- **Tailwind CSS** - Responsive styling
+- **TypeScript** - Type-safe development
+- **Chart.js** - Data visualization
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- Supabase project (create at supabase.com)
+
+### Installation
+
+```bash
+npm install
 ```
 
-To recreate this project with the same configuration:
+### Environment Setup
 
-```sh
-# recreate this project
-npx sv@0.12.8 create --template minimal --types ts --no-install .
+Create a `.env.local` file:
+
 ```
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:5175` and create an account.
+
+### Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Project Structure
+
+```
+src/
+├── routes/          # SvelteKit pages and layouts
+├── lib/
+│   ├── components/  # Reusable Svelte components
+│   ├── data/        # Data stores and types
+│   └── supabase/    # Database queries and client
+└── app.html         # HTML entry point
+```
+
+## Security
+
+- ✅ Server-side JWT verification
+- ✅ Row-Level Security (RLS) on all tables
+- ✅ Protected routes with authentication guards
+- ✅ Secure logout with session clearing
 
 ## Developing
 
